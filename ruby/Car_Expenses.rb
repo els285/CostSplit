@@ -23,9 +23,10 @@ class Regi_Expenses
     def assign(number_of_people,octile_usage,total_toll_cost)
 
         toll_expenses(total_toll_cost)
-        total_cost = @total_toll_cost + octile_usage*@octile_cost
+        @octile_usage = octile_usage
+        @total_cost = @total_toll_cost + octile_usage*@octile_cost
 
-        @individual_cost = total_cost/number_of_people
+        @individual_cost = @total_cost/number_of_people
 
         puts @individual_cost
     end
@@ -34,13 +35,14 @@ class Regi_Expenses
     def assign_with_weights(dic_of_people,octile_usage,total_toll_cost)
 
         toll_expenses(total_toll_cost)
-        total_cost = @total_toll_cost + octile_usage*@octile_cost
+        @octile_usage = octile_usage
+        @total_cost = @total_toll_cost + @octile_usage*@octile_cost
 
         total_weight = 0
 
         dic_of_people.each_value {|value| total_weight += value} # This is a 
 
-        normalised_cost = total_cost/total_weight
+        normalised_cost = @total_cost/total_weight
         output_dic = {}
         dic_of_people.each do |person,weight|
             output_dic[person] = weight*normalised_cost
@@ -49,16 +51,6 @@ class Regi_Expenses
     end 
 
 end
-
-
-
-Trip1 = Regi_Expenses.new("Trip1")
-
-Trip1.update_petrol_tank(64.26)
-Trip1.assign_with_weights({"ethan"=>3,"jess"=>2},1,16)
-
-
-
 
 
 
