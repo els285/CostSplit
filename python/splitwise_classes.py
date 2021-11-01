@@ -48,6 +48,25 @@ class Person:
 
 ###########################################################################################################################
 
+class Pre_Payment:
+
+    '''
+    Pre-payments may have been made which must be taken into account.
+    '''
+    def __init__(self,giver,recipient,amount):
+
+        self.giver      = giver
+        self.recipient  = recipient
+        self.amount     = amount
+
+        recipient.net += -self.amount 
+        giver.net += self.amount
+        recipient.paid_by[giver] = amount
+        giver.paid_to[giver] = amount
+
+
+
+
 class Transaction:
 
     '''
@@ -66,7 +85,17 @@ class Transaction:
             individual.add_payment({self  :  self.payers[individual]})
 
         for individual in self.individual_amounts:
-            individual.add_expense({self:self.individual_amounts[individual]})
+            individual.add_expense({self  :  self.individual_amounts[individual]})
+
+
+    # def add_prepayment(self):
+    #     '''
+    #     Do this before calling assign_to_persons?
+    #     '''
+    #     for person in self.pre_contributed:
+
+
+
 
     def perTransaction_compute(self):
         '''
@@ -102,8 +131,8 @@ class Transaction:
         # nxgraph_plotly(G)
         nx.draw_networkx(G)
 
-        plt.show()
-        input()
+        # plt.show()
+        # input()
 
 
     ################################################################################################
@@ -113,18 +142,28 @@ class Transaction:
         self.payers         = {}
         self.participants   = {}
         self.involved       = []
+        self.pre_contributed = {}
+        # self.type
 
-        if "type" in kwargs: self.type = kwargs["type"]
+        if "type" in kwargs: self.type = kwargs["type"] # Use this type part
         if "date" in kwargs: self.date = kwargs["date"]
 
         if "payers"         in kwargs: 
             self.payers= kwargs["payers"] 
-            total_paid = total(self.payers) # This generates the total amount spent of all the payers
-            self.amount_paid = total_paid
+            self.amount_paid = total(self.payers) # This generates the total amount spent of all the payers
+
+        # if self.type == "weighted":
 
         if "participants"     in kwargs: 
             self.participants     = kwargs["participants"] 
             self.individual_amounts = update_dues(self.participants,self.amount_paid)
+
+
+
+        # if "pre_contributed" in kwargs:
+        #     self.pre_contributed = kwargs["pre_contributed"]
+        #     self.individual_amounts
+
 
         self.involved = list(self.payers) + list(set(list(self.participants)) - set(list(self.payers)))
 
@@ -134,6 +173,8 @@ class Transaction:
 
         # Assign the costs to individuals
         self.assign_to_persons()
+
+
 
         # Do a local splitwise calculation
         if "doPerTransactionSplitwise" in kwargs:
@@ -186,6 +227,7 @@ class Trip:
         self.trip_name         = trip_name
         self.transactions = {}
         self.attendees = {}
+        self.prepayments = []
 
         if "list_of_transactions" in kwargs:
             for trans in kwargs["list_of_transactions"]:
@@ -203,4 +245,8 @@ class Trip:
 
     def doOverallCalculation(self):
         self.credit_list,self.debt_list,self.splitwise_transactions,self.overall_transaction_graph = compute(self.attendees.values())
+
+    def add_prepayment(self,prepayment):
+        self.prepayments.append(prepayment)
+
 

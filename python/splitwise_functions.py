@@ -19,24 +19,41 @@ def total(dict_num):
     return sum(dict_num.values())
 
 
+def over_paid(dic_of_over_payers,dic_of_payers):
+    pass
+
+
+
+
 def list2values(list_of_participants,sub_total,individual_amounts):
     individual_amount_value = sub_total/len(list_of_participants)
-    for indiv in list_of_participants: individual_amounts[indiv] = (individual_amount_value)
+    for indiv in list_of_participants: 
+        individual_amounts[indiv] = (individual_amount_value)
+        print(individual_amounts)
+        input()
     return individual_amounts
 
 def update_dues(participants,amount_paid):
     individual_amounts = {}
 
 
-    if          isinstance(participants,str):        individual_amounts = {participants:amount_paid}
-    elif      isinstance    (participants,list ):        individual_amounts=list2values(participants,amount_paid,individual_amounts)
-    elif isinstance    (participants,tuple):        individual_amounts=list2values(list(participants),amount_paid,individual_amounts)
-    elif isinstance    (participants,dict ):
+    if        isinstance(participants,str  ):   individual_amounts = {participants:amount_paid}
+    elif      isinstance(participants,list ):   individual_amounts = list2values(participants,amount_paid,individual_amounts)
+    elif      isinstance(participants,tuple):   individual_amounts = list2values(list(participants),amount_paid,individual_amounts)
+    
+    elif      isinstance(participants,dict ):
+
+        # print(participants)
+        # input()
+
         for sub_party in participants.keys():
             if   isinstance(sub_party,list ):    list2values(sub_party,participants[sub_party],individual_amounts)
             elif isinstance(sub_party,tuple):    list2values(list(sub_party),participants[sub_party],individual_amounts)
             elif isinstance(sub_party,str  ):     individual_amounts[sub_party] = participants[sub_party]
-        if total(individual_amounts) != amount_paid: print("WARNING. Amount paid does not match participants' individual costs!")
+        if total(individual_amounts) != amount_paid: 
+            print("WARNING. Amount paid does not match participants' individual costs!")
+            print(total(individual_amounts))
+            print(amount_paid)
 
     return individual_amounts
 
@@ -62,6 +79,10 @@ def compute(participant_list):
     # summary(self.attendees.values(),self.transactions.values())
 
     credit_list,debt_list=credit_or_debt(participant_list)
+
+    print(credit_list)
+    print(debt_list)
+    input()
 
     overall_state_of_play(participant_list)
 
