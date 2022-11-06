@@ -6,7 +6,7 @@ Pip install from page?
 
 1. Clone repository
 2. `cd` into respository
-3 `python3 -m pip install .`
+3. `python3 -m pip install .`
 
 ## YAML-based Running
 ```bash
