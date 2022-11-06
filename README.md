@@ -1,4 +1,40 @@
 # CostSplit
-"Split-wise" inspired code for calculating income and expenditure for large parties.
+A Python package for calculating income and expenditure for large parties.
 
-Initially written in Python, but now being translated into Ruby with a web-app based interface to follow.
+## Installation
+Pip install from page?
+
+## YAML-based Running
+```bash
+python3 costsplit.from_config <name_of_config_file>.yml
+```
+### Example Configuration File
+```yaml
+Trip1:
+  Attendees:
+    - Ethan
+    - Flora
+    - Blanca
+    - Steph
+  Transactions:
+    Fondue:
+      Payees: 
+        Type: real
+        Ethan: 100
+      Participants:
+        Type: weights
+        Ethan: 1
+        Flora: 1
+        Blanca: 1
+        Steph: 1
+    Cocktails:
+      Payees:
+        Type: real
+        Flora: 100
+      Participants:
+        Type: weights
+        Ethan: 2
+        Blanca: 1
+        Flora: 1
+        Steph: 1
+```
