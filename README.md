@@ -10,7 +10,7 @@ Pip install from page?
 
 ## YAML-based Running
 ```bash
-python3 costsplit.from_config <name_of_config_file>.yml
+python3 -m costsplit.from_config <name_of_config_file>.yml
 ```
 ### Example Configuration File
 ```yaml
