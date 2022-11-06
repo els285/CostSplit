@@ -1,0 +1,32 @@
+Trip1:
+  Attendees:
+    - Ethan
+    - Flora
+    - Blanca
+    - Steph
+    # - Dave
+  Transactions:
+    Fondue:
+      Payees: 
+        Type: real
+        Ethan: 100
+      Participants:
+        Type: weights
+        Ethan: 1
+        Flora: 1
+        Blanca: 1
+        Steph: 1
+    Cocktails:
+      Payees:
+        Type: real
+        Flora: 100
+      Participants:
+        Type: weights
+        Ethan: 2
+        Blanca: 1
+        Flora: 1
+        Steph: 1
+      
+
+
+    
