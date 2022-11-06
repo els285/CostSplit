@@ -4,6 +4,10 @@ A Python package for calculating income and expenditure for large parties.
 ## Installation
 Pip install from page?
 
+1. Clone repository
+2. `cd` into respository
+3 `python3 -m pip install .`
+
 ## YAML-based Running
 ```bash
 python3 costsplit.from_config <name_of_config_file>.yml
