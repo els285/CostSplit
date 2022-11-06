@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "costsplit"
+version = "0.0.1"
+authors = [
+  { name="Ethan Simpson", email="ethanimpson285@gmail.com" },
+]
+description = """A package for computing simplified payments structures for 
+                    group transactions"""
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://gitlab.cern.ch/esimpson/CostSplit"
+"Bug Tracker" = "https://gitlab.cern.ch/esimpson/CostSplit"

@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: costsplit
+Version: 0.0.1
+Summary: A package for computing simplified payments structures for 
+Author-email: Ethan Simpson <ethanimpson285@gmail.com>
+Project-URL: Homepage, https://gitlab.cern.ch/esimpson/CostSplit
+Project-URL: Bug Tracker, https://gitlab.cern.ch/esimpson/CostSplit
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# CostSplit
+"Split-wise" inspired code for calculating income and expenditure for large parties.
+
+Initially written in Python, but now being translated into Ruby with a web-app based interface to follow.
