@@ -1,3 +1,6 @@
+from costsplit.Graph import generate_graph,draw_plotly_graph
+from costsplit.Settlement import Settlement
+
 class Trip:
 
     def __init__(self,trip_name:str, attendees=None, transactions=None, **kwargs):
@@ -59,8 +62,7 @@ class Trip:
                                 print(indiv2.name + " paid " + indiv1.name + " the amount of " + str(paid) )
                                 indiv1.paid_by = {**indiv1.paid_by , **{indiv2 : paid}}
                                 indiv2.paid_to = {**indiv2.paid_to , **{indiv1 : paid}}
-
-                                self.settlements.append({"giver": indiv2,"recipient":indiv1,"amount":paid})
+                                self.settlements.append(Settlement(_from=indiv2,_to=indiv1,amount=paid))
                             else:
                                 paid = abs(indiv2.running_net - difference)
                                 left = abs(difference)
@@ -70,12 +72,20 @@ class Trip:
                                 indiv2.paid_to = {**indiv2.paid_to , **{indiv1 : paid}}
                                 if paid != 0:
                                     print(indiv2.name + " pays " + indiv1.name + " " + str(paid) + " but has " + str(left) + " left over")
-                                    self.settlements.append({"giver": indiv2,"recipient":indiv1,"amount":paid})
+                                    self.settlements.append(Settlement(_from=indiv2,_to=indiv1,amount=paid))
 
                                 else: 
                                     pass
                         else: 
                             pass
+
+
+
+    def draw_transaction_graph(self):
+
+        g = generate_graph(self.settlements)
+        draw_plotly_graph(g)
+
 
 
 
@@ -91,8 +101,7 @@ class Trip:
     #     self.transactions.append(new_transaction)
 
 
-    def doOverallCalculation(self):
-        self.credit_list,self.debt_list,self.splitwise
+
 
 
 # from Person import Person
